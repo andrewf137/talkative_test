@@ -35,15 +35,15 @@ if( $file == false ) {
  fclose( $file );
 
 $obj = new \Talkative\TextStatistics();
-for ($i=1; $i <= 100; $i++) {
+// for ($i=1; $i <= 100; $i++) {
     $numOfWords = $obj->wordCount($fileText);
-}
+// }
 // $numOfChars = $obj->characterCount($fileText);
 
 //  echo ( "File size : $filesize bytes" );
 //  echo "\n";
 //  echo ( "<pre>$filetext</pre>" );
-// echo ("No of words:" . $numOfWords . "\n");
+echo ("No of words:" . $numOfWords . "\n");
 // echo ("No of characters:" . $numOfChars . "\n");
 // echo (TextUtils::cleanText('MaÃ±ana toca programaciÃ³n')."\n");
 // echo (TextUtils::cleanText('áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙ')."\n");

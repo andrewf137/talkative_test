@@ -2,19 +2,15 @@
 
 namespace Talkative;
 
+use Talkative\TextUtils;
+
 class TextStatistics
 {
-    /**
-     * @var string $strEncoding Used to hold character encoding to be used
-     * by object, if set
-     */
-    protected $strEncoding = '';
-
     /**
      * @var string $strText Holds the last text checked. If no text passed to
      * function, it will use this text instead.
      */
-    private static $strText = false;
+    private $strText = false;
 
     /**
      * Constructor.
@@ -22,27 +18,24 @@ class TextStatistics
      * @param  string  $strEncoding Optional character encoding.
      * @return void
      */
-    public function __construct($strEncoding = '')
-    {
-        if ($strEncoding != '') {
-            // Encoding is given. Use it!
-            $this->strEncoding = $strEncoding;
-        }
-    }
+    // public function __construct(TextUtils $textUtils)
+    // {
+    //     $this->textUtils = $textUtils;
+    // }
 
     /**
-     * Set the text to measure the readability of.
+     * Clean the text and srore it for subsequent queries.
      * @param   string|boolean  $strText Text to be checked
      * @return  string                   Cleaned text
      */
     public function setText(?string $strText): string
     {
-        // If text passed in, clean it up and store it for subsequent queries
         if ($strText !== false) {
-            self::$strText = TextUtils::cleanText($strText);
+            $utils = new TextUtils();
+            $this->strText = $utils->cleanText($strText);
         }
 
-        return self::$strText;
+        return $this->strText;
     }
 
     /**
@@ -53,7 +46,7 @@ class TextStatistics
     public function wordCount(?string $strText): int
     {
         $strText = $this->setText($strText);
-
-        return TextUtils::wordCount($strText, $this->strEncoding);
+        $utils = new TextUtils();
+        return $utils->wordCount($strText);
     }
 }
