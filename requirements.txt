@@ -1,0 +1,34 @@
+Please write PHP code to read the contents of a plain text file and display:
+  * The total number of words
+  * The average word length
+  * The most frequently occurring word length
+  * A list of the number of words of each length
+
+Please submit your code in a zip file via email (to team@talkative.uk) along with instructions for its installation and use along with any assumptions you have made about what defines a word (using as a basis the rules that can be deduced from the example below)
+
+For example given a file that contains the following text:
+
+Hello world & good morning. The date is 18.05.2016
+
+We would expect the following output:
+
+Word count = 9
+Average word length = 4.556
+Number of words of length 1 is 1
+Number of words of length 2 is 1
+Number of words of length 3 is 1
+Number of words of length 4 is 2
+Number of words of length 5 is 2
+Number of words of length 7 is 1
+Number of words of length 10 is 1
+
+The most frequently occurring word length is 2, for word lengths of 4 & 5
+
+Note that we will test code submissions on a number of files of various lengths ranging from the above example through to the bible (http://janelwashere.com/files/bible_daily.txt).
+
+Clue – Do not forget to consider formatted numbers.
+
+You will be marked on the following areas:
+  * Performance and ability to handle large data sets
+  * Styling; Code is structure and formatting
+  * Ability to account for multiple use cases
