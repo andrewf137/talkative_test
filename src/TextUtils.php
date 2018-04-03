@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Talkative;
 
@@ -84,6 +84,11 @@ class TextUtils
         $intWords = 1 + $this->textLength(preg_replace('`[^ ]`', '', preg_replace('`\s+`', ' ', $strText))); // Space count + 1 is word count
 
         return $intWords;
+    }
+
+    public function getFileContent()
+    {
+        return null;
     }
 
 }

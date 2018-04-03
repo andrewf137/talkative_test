@@ -1,10 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 // Developed under php 7.2
 namespace Talkative;
 
-// require_once(__DIR__.'\\vendor\\autoload.php');
-require_once(__DIR__.'\\TextStatistics.php');
-require_once(__DIR__.'\\TextUtils.php');
+require_once(__DIR__.'\\vendor\\autoload.php');
+// require_once(__DIR__.'\\src\\TextStatistics.php');
+// require_once(__DIR__.'\\src\\TextUtils.php');
+// require_once(__DIR__.'\\src\\TextSource.php');
 /**
  * Run the following commands to execute from command line:
  *
@@ -24,26 +25,30 @@ require_once(__DIR__.'\\TextUtils.php');
 //     }
 // }
 
-$fileName = 'input.txt';
-$file = fopen( $fileName, "r" );
-if( $file == false ) {
-    echo ( "Error in opening file" );
-    exit();
- }
- $fileSize = filesize( $fileName );
- $fileText = fread( $file, $fileSize );
- fclose( $file );
+$textSource = new TextSource('input4.txt');
+$obj = new TextStatistics($textSource);
+echo ($obj->wordCount());
+// die();
+// $fileName = 'input.txt';
+// $file = fopen( $fileName, "r" );
+// if( $file == false ) {
+//     echo ( "Error in opening file" );
+//     exit();
+//  }
+//  $fileSize = filesize( $fileName );
+//  $fileText = fread( $file, $fileSize );
+//  fclose( $file );
 
-$obj = new \Talkative\TextStatistics();
+// $obj = new \Talkative\TextStatistics();
 // for ($i=1; $i <= 100; $i++) {
-    $numOfWords = $obj->wordCount($fileText);
+    // $numOfWords = $obj->wordCount($fileText);
 // }
 // $numOfChars = $obj->characterCount($fileText);
 
 //  echo ( "File size : $filesize bytes" );
 //  echo "\n";
 //  echo ( "<pre>$filetext</pre>" );
-echo ("No of words:" . $numOfWords . "\n");
+// echo ("No of words:" . $numOfWords . "\n");
 // echo ("No of characters:" . $numOfChars . "\n");
 // echo (TextUtils::cleanText('MaÃ±ana toca programaciÃ³n')."\n");
 // echo (TextUtils::cleanText('áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙ')."\n");

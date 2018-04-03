@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Talkative\\": ["src/", "tests/"]
+            "Talkative\\": ["src/", "src/exceptions/", "tests/"]
         }
     }
 }

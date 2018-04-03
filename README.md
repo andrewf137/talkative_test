@@ -1,4 +1,4 @@
-# Text Statistics List 1.1.0
+# Text Statistics 1.1.0
 
 ## Changelog
 * Add folder structure

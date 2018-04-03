@@ -1,8 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Talkative;
-
-use Talkative\TextUtils;
 
 class TextStatistics
 {
@@ -10,7 +8,7 @@ class TextStatistics
      * @var string $strText Holds the last text checked. If no text passed to
      * function, it will use this text instead.
      */
-    private $strText = false;
+    private $file;
 
     /**
      * Constructor.
@@ -18,35 +16,36 @@ class TextStatistics
      * @param  string  $strEncoding Optional character encoding.
      * @return void
      */
-    // public function __construct(TextUtils $textUtils)
-    // {
-    //     $this->textUtils = $textUtils;
-    // }
+    public function __construct(TextSource $textSource)
+    {
+        $this->textSource = $textSource;
+        $this->textUtils = new TextUtils();
+    }
 
     /**
      * Clean the text and srore it for subsequent queries.
      * @param   string|boolean  $strText Text to be checked
      * @return  string                   Cleaned text
      */
-    public function setText(?string $strText): string
+    public function setText()
     {
-        if ($strText !== false) {
-            $utils = new TextUtils();
-            $this->strText = $utils->cleanText($strText);
+        if ($fileContent = $this->textSource->getStringText()) {
+            return $this->textUtils->cleanText($fileContent);
+        } else {
+            return new WrongFileNameException('wrong file name');
         }
-
-        return $this->strText;
     }
 
     /**
      * Returns word count for text.
-     * @param   boolean|string  $strText      Text to be measured
      * @return  int
      */
-    public function wordCount(?string $strText): int
+    public function wordCount()
     {
-        $strText = $this->setText($strText);
-        $utils = new TextUtils();
-        return $utils->wordCount($strText);
+        if ($strText = $this->setText()) {
+            return $this->textUtils->wordCount($strText);
+        } else {
+            return new WrongFileNameException('wrong file name');
+        }
     }
 }
