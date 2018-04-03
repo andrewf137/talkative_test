@@ -6,6 +6,18 @@ use PHPUnit\Framework\TestCase;
 
 class TextStatisticsTest extends TestCase
 {
+
+    private $_testable = null;
+
+    public function setUp()
+    {
+      $this->_testable = null;
+    }
+
+    public function tearDown()
+    {
+      $this->_testable = null;
+    }
     /**
      * Test instantiate OutputIntegersList class.
      */
@@ -17,22 +29,47 @@ class TextStatisticsTest extends TestCase
     // }
 
     /**
-     * Test throw exception when one input argument is missing.
+     * Test throw exception when file name missing or null or wrong type.
      *
-     * @params string $a
+     * @params string $fileName
      *
      * @testWith      []
+     *                [null]
+     *                [1005]
      *
-     * @expectedException ArgumentCountError
+     * @expectedException TypeError
      */
-    public function testMissingFileName(string $fileName)
+    public function testMissingFileName($fileName)
     {
-        $textSource = new TextStatistics();
-        // $textSource->getStringText();
-        // $obj = new TextStatistics($textSource);
-        // echo ($obj->wordCount());
-        // $obj = new OutputIntegersList();
-        // $obj->validateArgs($a);
+        $textSource = new TextStatistics($fileName);
+    }
+
+    /**
+     * Test throw exception when file name does not correspond to an existing one.
+     *
+     * @params string $fileName
+     *
+     * @testWith      ["whatever.txt"]
+     *                ["qwert"]
+     */
+    public function testWrongFileName($fileName)
+    {
+        $textSource = new TextStatistics($fileName);
+        $this->expectException(WrongFileNameException::class);
+        $textSource->wordCount();
+    }
+
+    /**
+     * Test word count is zero for empty files.
+     *
+     * @params string $fileName
+     *
+     * @testWith      ["input4.txt"]
+     */
+    public function testEmptyFile($fileName)
+    {
+        $textSource = new TextStatistics($fileName);
+        $this->assertEquals(0, $textSource->wordCount());
     }
 
     /**
@@ -45,15 +82,15 @@ class TextStatisticsTest extends TestCase
      *
      * @expectedException WrongFileNameException
      */
-    public function testWrongFileName(string $fileName)
-    {
-        $textSource = new TextSource($fileName);
-        $textSource->getStringText();
-        $obj = new TextStatistics($textSource);
-        // echo ($obj->wordCount());
-        // $obj = new OutputIntegersList();
-        // $obj->validateArgs($a);
-    }
+    // public function testWrongFileName(string $fileName)
+    // {
+    //     $textSource = new TextSource($fileName);
+    //     $textSource->getStringText();
+    //     $obj = new TextStatistics($textSource);
+    //     // echo ($obj->wordCount());
+    //     // $obj = new OutputIntegersList();
+    //     // $obj->validateArgs($a);
+    // }
 
     /**
      * Test throw exception when both input arguments are missing.

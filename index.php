@@ -25,9 +25,17 @@ require_once(__DIR__.'\\vendor\\autoload.php');
 //     }
 // }
 
-$textSource = new TextSource('input4.txt');
-$obj = new TextStatistics($textSource);
-echo ($obj->wordCount());
+// $textSource = new TextSource('input4.txt');
+if (php_sapi_name() === 'cli') {
+    $fileName = $argv[1] ?? null;
+    try {
+        $obj = new TextStatistics($fileName);
+        echo ($obj->wordCount());
+    } catch(\Exception $e) {
+        echo 'Error: ' .$e->getMessage();
+    }
+}
+
 // die();
 // $fileName = 'input.txt';
 // $file = fopen( $fileName, "r" );
